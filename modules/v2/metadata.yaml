@@ -68,7 +68,7 @@ spec:
         description: Cloud Run service description. This field currently has a 512-character limit.
         varType: string
       - name: containers
-        description: Map of container images for the service
+        description: Container images for the service
         varType: |-
           list(object({
               container_name       = optional(string, null)
@@ -326,7 +326,7 @@ spec:
         varType: bool
         defaultValue: false
       - name: volumes
-        description: Volumes needed for environment variables (when using secret)
+        description: After creating a volume, navigate to the Container’s section to mount it to a container.
         varType: |-
           list(object({
               name = string
@@ -432,7 +432,7 @@ spec:
         description: The unique name for the revision. If this field is omitted, it will be automatically generated based on the Service name
         varType: string
       - name: template_scaling
-        description: Scaling settings for this Revision.
+        description: "min number of instances” : The service minimum instances is preferable for most use-cases. Only use this setting if you specifically require a per-revision setting."
         varType: |-
           object({
               min_instance_count = optional(number)

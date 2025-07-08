@@ -48,9 +48,138 @@ spec:
             container_image:
               name: container_image
               title: Container Image
-              subtext: Url of the Docker container image.
+              subtext: 'Test with a sample container, Learn more [How to build a container ?](https://cloud.google.com/run/docs/quickstarts?_gl=1*1ed6ek5*_ga*MTg1OTYwOTEwMS4xNzQ4NDMwOTQ0*_ga_WH2QY8WWF5*czE3NDkwODg5ODQkbzUkZzEkdDE3NDkwOTE2MjIkajIyJGwwJGgw) Should listen for HTTP requests on $PORT (default: 8080 ) and not rely on local state.'
               regexValidation: ^((([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}(:[0-9]+)?/)?([a-z0-9]+([._-][a-z0-9]+)*/)*[a-z0-9]+([._-][a-z0-9]+)*(:(\w[\w.-]{0,127})|@sha256:[a-fA-F0-9]{64})?)$
               validation: The image url is invalid.
+          properties:
+            depends_on_container:
+              name: depends_on_container
+              title: Depends on Container
+              subtext: Specify container start-up order. [Learn More](https://cloud.google.com/run/docs/configuring/services/containers?_gl=1*1n2l42d*_ga*Nzk3MTQzODgyLjE3NDMwMDk1MjA.*_ga_WH2QY8WWF5*czE3NDgzNTMwMjEkbzEwJGcxJHQxNzQ4MzU0MDUwJGoyNiRsMCRoMCRkSUJsTlEwYjhVYkJrdHBZSVFfOFBIaEx0cE1YVmhCUFBkQQ..#container-ordering)
+            container_args:
+              name: container_args
+              title: Container args
+              subtext: Comma separated list of arguments passed to the entry point command. [Learn More](https://cloud.google.com/run/docs/configuring/services/containers)
+            container_command:
+              name: container_command
+              title: Container command
+              subtext: 'Specifies the actual command run by the container. Leave blank to use the entry point command defined in the container image. Learn more : [How to configure containers ?](https://cloud.google.com/run/docs/configuring/services/containers)'
+            resources:
+              name: resources
+              title: Resources
+              properties:
+                limits:
+                  name: limits
+                  title: Limits
+                  properties:
+                    cpu:
+                      name: cpu
+                      title: CPU
+                      subtext: Number of vCPUs allocated to each instance of this container.
+                    memory:
+                      name: memory
+                      title: memory
+                      subtext: Memory to allocate to each instance of this container.
+                startup_cpu_boost:
+                  name: startup_cpu_boost
+                  title: Startup CPU boost
+                  subtext: Start containers faster by allocating more CPU during startup time. Adds flag --cpu-boost to service creation command” [Learn More](https://cloud.google.com/run/docs/configuring/services/cpu#startup-boost)
+            startup_probe:
+              name: startup_probe
+              title: Startup probe
+              properties:
+                failure_threshold:
+                  name: failure_threshold
+                  title: Failure threshold
+                  subtext: Number of times to retry the probe before marking the container as Unready.
+                initial_delay_seconds:
+                  name: initial_delay_seconds
+                  title: Initial delay seconds
+                  subtext: Number of seconds after the container has started before performing the first probe. Enter an integer value between 0 and 240.
+                timeout_seconds:
+                  name: timeout_seconds
+                  title: Timeout seconds
+                  subtext: Number of seconds after which the probe times out. This value shouldn't exceed Period seconds. Enter an integer value between 1 and 240.
+                period_seconds:
+                  name: period_seconds
+                  title: Period seconds
+                  subtext: Number of seconds to wait between starting a probe attempt. Enter an integer value between 1 and 240.
+                http_get:
+                  name: http_get
+                  title: Http get
+                  properties:
+                    get:
+                      name: get
+                      title: Get
+                      subtext: 'Path to access on the HTTP server. Ex: e.g./reddy'
+                    port:
+                      name: port
+                      title: Port
+                      subtext: Port to make a connection for the Cloud Run instance. It will default to the container port, whose default value is 8080.
+                    http_headers:
+                      name: http_headers
+                      title: Http headers
+                      subtext:  Custom headers to set in the request. HTTP allows repeated headers.
+                tcp_socket:
+                  name: tcp_socket
+                  title: TCP tcp_socket
+                  subtext: Port to make a connection for the Cloud Run instance. It will default to the container port, whose default value is 8080.
+                grpc:
+                  name: grpc
+                  title: GRPC
+                  properties:
+                    port:
+                      name: port
+                      title: Port
+                      subtext: Port to make a connection for the Cloud Run instance. It will default to the container port, whose default value is 8080.
+                    service_name:
+                      name: service
+                      title: Service
+                      subtext: '[Learn more]'
+            liveness_probe:
+              name: liveness_probe
+              title: Liveness probe
+              properties:
+                failure_threshold:
+                  name: failure_threshold
+                  title: Failure threshold
+                  subtext: Number of seconds after the container has started before performing the first probe. Enter an integer value between 0 and 3600/
+                initial_delay_seconds:
+                  name: initial_delay_seconds
+                  title: Initial delay seconds
+                  subtext: Number of times to retry the probe before marking the container as Unready.
+                timeout_seconds:
+                  name: timeout_seconds
+                  title: Timeout seconds
+                  subtext: Number of times to retry the probe before marking the container as Unready.
+                period_seconds:
+                  name: period_seconds
+                  title: Period seconds
+                  subtext: Number of seconds to wait between starting a probe attempt. Enter an integer value between 1 and 3600.
+                http_get:
+                  name: http_get
+                  title: Http get
+                  properties:
+                    path:
+                      name: path
+                      title: Path
+                      subtext: Path to access on HTTP server.
+                    port:
+                      name: port
+                      title: Port
+                      subtext: Port to make connection for the Cloud Run instance. It will default to container port which is 8080
+                    http_headers:
+                      name: http_headers
+                      title: Http headers
+                      subtext: Custom Headers to set in the request. HTTP allows repeated headers.
+                grpc:
+                  name: grpc
+                  title: GRPC
+                  properties:
+                    port:
+                      name: port
+                      title: Port
+                      subtext: Port to make connection for the Cloud Run instance. It will default to the container port which is 8080.  [Learn more](https://github.com/grpc/grpc/blob/master/doc/health-checking.md)  about gRPC services.
           altDefaults:
             - type: ALTERNATE_TYPE_DC
               value:
@@ -173,6 +302,28 @@ spec:
         volumes:
           name: volumes
           title: Volumes
+          subtext: After creating a volume, navigate to the Container’s section to mount it to a container.
+          properties:
+            secret:
+              name: secret
+              title: Secret
+              properties:
+                items:
+                  name: items
+                  title: Items
+                  properties:
+                    path:
+                      name: path
+                      title: Path
+                      subtext: 'Example format (parent secret): "projects/project-number/secrets/secret-name.'
+            nfs:
+              name: nfs
+              title: NFS
+              properties:
+                server:
+                  name: server
+                  title: Server
+                  subtext: The IP address or domain of your NFS server.
           level: 1
         vpc_access:
           name: vpc_access
