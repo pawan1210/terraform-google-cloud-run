@@ -109,7 +109,7 @@ variable "containers" {
       }), null)
     }), null)
   }))
-  description = "Map of container images for the service"
+  description = "Container images for the service"
 }
 
 variable "create_service_account" {
@@ -197,7 +197,7 @@ variable "volumes" {
       read_only = optional(string)
     }))
   }))
-  description = "Volumes needed for environment variables (when using secret)"
+  description = "After creating a volume, navigate to the Container’s section to mount it to a container."
   default     = []
 }
 
@@ -279,7 +279,7 @@ variable "template_scaling" {
     min_instance_count = optional(number)
     max_instance_count = optional(number)
   })
-  description = "Scaling settings for this Revision."
+  description = "min number of instances” : The service minimum instances is preferable for most use-cases. Only use this setting if you specifically require a per-revision setting."
   default     = null
 }
 
