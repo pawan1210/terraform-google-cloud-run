@@ -48,7 +48,7 @@ spec:
             container_image:
               name: container_image
               title: Container Image
-              subtext: Url of the Docker container image.
+              subtext: "Test with a sample container, Learn more [How to build a container ?](https://cloud.google.com/run/docs/quickstarts?_gl=1*1ed6ek5*_ga*MTg1OTYwOTEwMS4xNzQ4NDMwOTQ0*_ga_WH2QY8WWF5*czE3NDkwODg5ODQkbzUkZzEkdDE3NDkwOTE2MjIkajIyJGwwJGgw) Should listen for HTTP requests on $PORT (default: 8080 ) and not rely on local state"
               regexValidation: ^((([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}(:[0-9]+)?/)?([a-z0-9]+([._-][a-z0-9]+)*/)*[a-z0-9]+([._-][a-z0-9]+)*(:(\w[\w.-]{0,127})|@sha256:[a-fA-F0-9]{64})?)$
               validation: The image url is invalid.
           altDefaults:

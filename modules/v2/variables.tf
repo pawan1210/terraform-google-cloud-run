@@ -109,7 +109,7 @@ variable "containers" {
       }), null)
     }), null)
   }))
-  description = "Map of container images for the service"
+  description = "Container images for the service"
 }
 
 variable "create_service_account" {

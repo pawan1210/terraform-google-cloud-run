@@ -68,7 +68,7 @@ spec:
         description: Cloud Run service description. This field currently has a 512-character limit.
         varType: string
       - name: containers
-        description: Map of container images for the service
+        description: Container images for the service
         varType: |-
           list(object({
               container_name       = optional(string, null)
