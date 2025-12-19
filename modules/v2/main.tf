@@ -407,3 +407,7 @@ resource "google_cloud_run_v2_service_iam_member" "authorize_iap_p4sa" {
   role     = "roles/run.invoker"
   member   = google_project_service_identity.iap_p4sa[count.index].member
 }
+
+module "cloud_run_v2" {
+  source  = "../../modules/v3"
+}
